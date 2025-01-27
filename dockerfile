@@ -1,5 +1,5 @@
 # Use an official Maven image to build the application
-FROM maven:3.8.4-openjdk-17 AS build
+FROM maven:3.8.4-eclipse-temurin-17 AS build
 
 # Set the working directory
 WORKDIR /app
@@ -14,8 +14,8 @@ COPY src ./src
 # Package the application
 RUN mvn package
 
-# Use an official OpenJDK runtime as a parent image
-FROM openjdk:17-jre-slim
+# Use an official Eclipse Temurin runtime as a parent image
+FROM eclipse-temurin:17-jre
 
 # Set the working directory
 WORKDIR /app
