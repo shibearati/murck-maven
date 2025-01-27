@@ -1,25 +1,30 @@
-# Use an official SUSE Linux as a parent image
-FROM opensuse/leap:latest
-
-# Install OpenJDK
-RUN zypper refresh && \
-    zypper install -y java-17-openjdk && \
-    zypper clean -a
+# Use an official Maven image to build the application
+FROM maven:3.8.4-openjdk-17 AS build
 
 # Set the working directory
-WORKDIR /usr/src/app
+WORKDIR /app
 
-# Copy package.json and package-lock.json
-COPY package*.json ./
-
-# Install dependencies
-RUN npm install
+# Copy the pom.xml file and download dependencies
+COPY pom.xml .
+RUN mvn dependency:go-offline
 
 # Copy the rest of the application code
-COPY . .
+COPY src ./src
+
+# Package the application
+RUN mvn package
+
+# Use an official OpenJDK runtime as a parent image
+FROM openjdk:17-jre-slim
+
+# Set the working directory
+WORKDIR /app
+
+# Copy the packaged application from the build stage
+COPY --from=build /app/target/your-app.jar /app/your-app.jar
 
 # Expose the port the app runs on
 EXPOSE 8080
 
 # Command to run the application
-CMD ["node", "index.js"]
+CMD ["java", "-jar", "/app/your-app.jar"]
