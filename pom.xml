@@ -32,13 +32,11 @@
                     <configuration>
                         <source>17</source>
                         <target>17</target>
-                    </configuration>
-                    <configuration>
-                         <hostname>localhost</hostname>
-                         <port>9990</port>
-                         <username>arati</username>
-                         <password>shibe@123</password>
-                         <filename>${project.build.finalName}.war</filename>
+                        <hostname>localhost</hostname>
+                        <port>9990</port>
+                        <username>arati</username>
+                        <password>shibe@123</password>
+                        <filename>${project.build.finalName}.war</filename>
                     </configuration>
                 </plugin>
             </plugins>
