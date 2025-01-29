@@ -26,13 +26,19 @@
         <pluginManagement>
             <plugins>
                 <plugin>
-                    <groupId>org.apache.maven.plugins</groupId>
-                    <artifactId>maven-compiler-plugin</artifactId>
-                    <version>3.8.1</version>
+                    <groupId>org.wildfly.plugins</groupId>
+                    <artifactId>wildfly-maven-plugin</artifactId>
+                    <version>5.1.1.Final</version>
                     <configuration>
                         <source>17</source>
                         <target>17</target>
-                    </configuration>
+                    <configuration>
+                         <hostname>localhost</hostname>
+                         <port>9990</port>
+                         <username>arati</username>
+                         <password>shibe@123</password>
+                         <filename>${project.build.finalName}.war</filename>
+            </configuration>
                 </plugin>
             </plugins>
         </pluginManagement>
